@@ -1,13 +1,14 @@
 const express = require("express");
 const app = express();
+const router = require("./routes/route");
 
 require("dotenv").config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello Worldaa!");
-});
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use("/", router);
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
