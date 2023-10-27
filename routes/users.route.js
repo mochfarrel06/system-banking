@@ -9,7 +9,13 @@ const {
 } = require("../middleware/middleware");
 
 router.use(PrintSuccess);
-router.get("/", TestUser);
-router.post("/", CheckPostReq, TestUserPost);
+
+router.use("/v1", () => {
+  router.get("/", TestUser);
+});
+
+router.use("/v2", () => {
+  router.post("/", CheckPostReq, TestUserPost);
+});
 
 module.exports = router;
