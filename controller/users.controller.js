@@ -81,18 +81,22 @@ async function GetByPK(req, res) {
 
 async function EditUsers(req, res) {
   const {id} = req.params;
-  const {name, email, password} = req.body;
+  try {
+    const {name, email, password} = req.body;
 
-  const updatedUser = await prisma.users.update({
-    where: {id: parseInt(id)},
-    data: {
-      name,
-      email,
-      password,
-    },
-  });
+    const updatedUser = await prisma.users.update({
+      where: {id: parseInt(id)},
+      data: {
+        name,
+        email,
+        password,
+      },
+    });
 
-  res.json(updatedUser);
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({message: "Internal server error"});
+  }
 }
 
 async function DeleteUsers(req, res) {

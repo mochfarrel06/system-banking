@@ -61,8 +61,60 @@ async function GetAccountsById(req, res) {
   }
 }
 
+async function EditAccounts(req, res) {
+  const {id} = req.params;
+  try {
+    const {user_id, bank_name, bank_account_number, balance} = req.body;
+    const updateAccount = await prisma.bank_accounts.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        user_id,
+        bank_name,
+        bank_account_number,
+        balance,
+      },
+    });
+
+    res.json(updateAccount);
+  } catch (error) {
+    res.status(500).json({message: "Internal server error"});
+  }
+}
+
+async function DeleteAccounts(req, res) {
+  const {id} = parseInt(req.params.id);
+
+  try {
+    await prisma.users.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    await prisma.transactions.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    const deleteAccounts = await prisma.bank_accounts.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    res.json(deleteAccounts);
+  } catch (error) {
+    res.status(500).json({message: "Internal server error"});
+  }
+}
+
 module.exports = {
   InsertAccounts,
   GetAccounts,
   GetAccountsById,
+  EditAccounts,
+  DeleteAccounts,
 };
