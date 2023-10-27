@@ -1,21 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const {TestUser, TestUserPost} = require("../controller/users.controller");
-
 const {
-  PrintSuccess,
-  PrintSuccessRoute,
-  CheckPostReq,
-} = require("../middleware/middleware");
+  InsertUsers,
+  Get,
+  GetByPK,
+  EditUsers,
+  DeleteUsers,
+} = require("../controller/users.controller");
 
-router.use(PrintSuccess);
+const {CheckUsersReq} = require("../middleware/middleware");
 
-router.use("/v1", () => {
-  router.get("/", TestUser);
-});
+// router.use(PrintSuccess);
+// router.get("/", TestUser);
+// router.post("/", CheckPostReq);
 
-router.use("/v2", () => {
-  router.post("/", CheckPostReq, TestUserPost);
-});
+router.get("/", Get);
+router.get("/:id", GetByPK);
+router.post("/", CheckUsersReq, InsertUsers);
+router.put("/:id", EditUsers);
+router.delete("/:id", DeleteUsers);
 
 module.exports = router;
