@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.set("view engine", "ejs");
 
-app.use("/api/v1", router);
+app.use("/", router);
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);

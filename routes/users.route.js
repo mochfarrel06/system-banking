@@ -8,7 +8,7 @@ const {
   DeleteUsers,
 } = require("../controller/users.controller");
 
-const {CheckUsersReq} = require("../middleware/middleware");
+// const {CheckUsersReq} = require("../middleware/middleware");
 
 // router.use(PrintSuccess);
 // router.get("/", TestUser);
@@ -16,7 +16,7 @@ const {CheckUsersReq} = require("../middleware/middleware");
 
 router.get("/", Get);
 router.get("/:id", GetByPK);
-router.post("/", CheckUsersReq, InsertUsers);
+router.post("/", InsertUsers);
 router.put("/:id", EditUsers);
 router.delete("/:id", DeleteUsers);
 

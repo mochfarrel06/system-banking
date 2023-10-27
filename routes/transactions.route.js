@@ -9,6 +9,6 @@ const {
 
 router.post("/", sendMoney);
 router.get("/", getTransactions);
-router.get("/id", getTransactionById);
+router.get("/:id", getTransactionById);
 
 module.exports = router;

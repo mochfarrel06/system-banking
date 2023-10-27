@@ -14,8 +14,8 @@ router.get("/ping", (req, res) => {
   });
 });
 
-router.use("/users", userRoute);
-router.use("/accounts", accountsRoute);
-router.use("/transactions", transactionsRoute);
+router.use("/api/v1/users", userRoute);
+router.use("/api/v1/accounts", accountsRoute);
+router.use("/api/v1/transactions", transactionsRoute);
 
 module.exports = router;
